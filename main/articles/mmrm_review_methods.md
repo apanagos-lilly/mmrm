@@ -539,13 +539,13 @@ implementations considered produce similar empirical biases, variances,
     #> other attached packages:
     #>  [1] ggplot2_4.0.3           emmeans_2.0.3           knitr_1.51             
     #>  [4] sasr_0.1.5              glmmTMB_1.1.14          nlme_3.1-169           
-    #>  [7] lme4_2.0-1              Matrix_1.7-5            mmrm_0.3.17.9005       
+    #>  [7] lme4_2.0-1              Matrix_1.7-5            mmrm_0.3.17.9006       
     #> [10] stringr_1.6.0           microbenchmark_1.5.0    purrr_1.2.2            
     #> [13] dplyr_1.2.1             clusterGeneration_1.3.8 MASS_7.3-65            
     #> 
     #> loaded via a namespace (and not attached):
     #>  [1] gtable_0.3.6        TMB_1.9.21          xfun_0.57          
-    #>  [4] bslib_0.10.0        htmlwidgets_1.6.4   lattice_0.22-9     
+    #>  [4] bslib_0.11.0        htmlwidgets_1.6.4   lattice_0.22-9     
     #>  [7] numDeriv_2016.8-1.1 vctrs_0.7.3         tools_4.5.2        
     #> [10] Rdpack_2.6.6        generics_0.1.4      sandwich_3.1-1     
     #> [13] tibble_3.3.1        pkgconfig_2.0.3     checkmate_2.3.4    
