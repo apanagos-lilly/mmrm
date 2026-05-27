@@ -1,6 +1,6 @@
 # Changelog
 
-## mmrm 0.3.17.9007
+## mmrm 0.3.17.9009
 
 #### New Features
 
@@ -11,8 +11,7 @@
   [`lm()`](https://rdrr.io/r/stats/lm.html). When an explicit contrast
   matrix includes levels not present in the fitting data, those levels
   are preserved in the model and marked as aliased, enabling prediction
-  on new data containing those levels
-  ([\#562](https://github.com/openpharma/mmrm/issues/562)).
+  on new data containing those levels.
 - [`emp_start()`](https://openpharma.github.io/mmrm/reference/emp_start.md)
   now supports all non-spatial covariance structure types, not just
   unstructured. Parametrized covariance structures now use a simple
