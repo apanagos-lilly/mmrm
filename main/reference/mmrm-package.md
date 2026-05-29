@@ -44,6 +44,12 @@ Authors:
 - Nikolas Ivan Krieger <nikolas.krieger@experis.com>
   ([ORCID](https://orcid.org/0000-0002-4581-3545))
 
+- Arryn Panagos <panagos_arryn@lilly.com>
+  ([ORCID](https://orcid.org/0000-0003-0452-2095))
+
+- Jeremiah Jones <jeremiah.jones@lilly.com>
+  ([ORCID](https://orcid.org/0000-0003-1239-2542))
+
 Other contributors:
 
 - Craig Gower-Page <craig.gower-page@roche.com> \[contributor\]
