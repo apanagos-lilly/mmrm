@@ -170,16 +170,10 @@ matrix as the covariance, however there are convergence problems for
 `ar1` and `ar1h` if the identity matrix is provided, thus for these two
 covariance structures we use \\\rho=0.5\\ instead. `emp_start` will try
 to use the empirical covariance matrix of the residuals of the ordinary
-least squares model to derive starting values for all non-spatial
-covariance types. The empirical covariance matrix will be used as the
-starting value for the unstructured covariance type. For other
-parametrized covariance types, the empirical covariance is decomposed
-into standard deviations and correlations. Simple moment estimators
-based on this decomposition are used as starting values. For example,
-the upper-triangular empirical correlations are averaged for the
-compound-symmetry correlation parameter. If some timepoints are missing
-from data, identity matrix will be used for that submatrix. The
-correlation between existing and non-existing timepoints are set to 0.
+least squares model as the starting value for unstructured covariance
+structure. If some timepoints are missing from data, identity matrix
+will be used for that submatrix. The correlation between existing and
+non-existing timepoints are set to 0.
 
 As the starting values will affect the result, please be cautious on
 choosing the starting values.
@@ -691,6 +685,140 @@ correlation between `VIS2` and `VIS4` the same as the correlation
 between `VIS1` and `VIS2`. Hence we get a smaller correlation estimate
 here compared to the first result, which includes `VIS3` explicitly.
 
+### Fine control over design matrix
+
+In some scenarios, we may want to control how the design matrix is
+constructed in finer detail. This can be especially of interest if there
+are factor levels not present in the current dataset, which nonetheless
+are valid levels that should not result in later errors (for example,
+when using `predict` functions). In the example below, `mmrm` might not
+run if only one factor level is available.
+
+``` r
+
+ex_data <- fev_data[!(fev_data$RACE == "White" & fev_data$SEX == "Male"),]
+fit_subgroup1 <- mmrm(
+  formula = FEV1 ~ SEX + ARMCD * AVISIT + us(AVISIT | USUBJID),
+  data = ex_data[ex_data$RACE != "White",],
+  vcov = "Asymptotic"
+)
+fit_subgroup2 <- mmrm(
+  formula = FEV1 ~ SEX + ARMCD * AVISIT + us(AVISIT | USUBJID),
+  data = ex_data[ex_data$RACE == "White",],
+  vcov = "Asymptotic"
+)
+#> Some factor levels are dropped due to singular design matrix: SEX
+#> Error in `contrasts<-`:
+#> ! contrasts can be applied only to factors with 2 or more levels
+
+emmeans::emmeans(fit_subgroup1, ~ARMCD|AVISIT, data=fev_data, weights="proportional")
+#> mmrm() registered as emmeans extension
+#> AVISIT = VIS1:
+#>  ARMCD emmean    SE    df lower.CL upper.CL
+#>  PBO     31.8 0.812 106.9     30.2     33.4
+#>  TRT     35.2 0.916 106.1     33.4     37.0
+#> 
+#> AVISIT = VIS2:
+#>  ARMCD emmean    SE    df lower.CL upper.CL
+#>  PBO     36.9 0.671 106.8     35.5     38.2
+#>  TRT     40.4 0.720 104.2     38.9     41.8
+#> 
+#> AVISIT = VIS3:
+#>  ARMCD emmean    SE    df lower.CL upper.CL
+#>  PBO     41.9 0.515  94.6     40.9     43.0
+#>  TRT     44.9 0.631  95.2     43.6     46.1
+#> 
+#> AVISIT = VIS4:
+#>  ARMCD emmean    SE    df lower.CL upper.CL
+#>  PBO     46.3 1.340  96.0     43.6     48.9
+#>  TRT     50.9 1.470  95.4     47.9     53.8
+#> 
+#> Results are averaged over the levels of: SEX 
+#> Confidence level used: 0.95
+emmeans::emmeans(fit_subgroup2, ~ARMCD|AVISIT, data=fev_data, weights="proportional")
+#> Error:
+#> ! object 'fit_subgroup2' not found
+```
+
+By setting the contrasts argument specifically, just like in
+[`lm()`](https://rdrr.io/r/stats/lm.html), we can avoid this error.
+
+``` r
+
+contr_mat <- contr.sum(nlevels(ex_data$SEX))
+rownames(contr_mat) <- levels(fev_data$SEX)
+contr_mat
+#>        [,1]
+#> Male      1
+#> Female   -1
+```
+
+Now the subgroup analysis code will run correctly, even when emmeans
+averages over the baseline values that aren’t subgroup-specific.
+
+``` r
+
+fit_subgroup1 <- mmrm(
+  formula = FEV1 ~ SEX + ARMCD * AVISIT + us(AVISIT | USUBJID),
+  data = ex_data[ex_data$RACE == "White",],
+  vcov = "Asymptotic",
+  contrasts = list(SEX = contr_mat)
+)
+fit_subgroup2 <- mmrm(
+  formula = FEV1 ~ SEX + ARMCD * AVISIT + us(AVISIT | USUBJID),
+  data = ex_data[ex_data$RACE != "White",],
+  vcov = "Asymptotic",
+  contrasts = list(SEX = contr_mat)
+)
+
+emmeans::emmeans(fit_subgroup1, ~ARMCD|AVISIT, data=fev_data, weights="proportional")
+#> AVISIT = VIS1:
+#>  ARMCD emmean SE df asymp.LCL asymp.UCL
+#>  PBO   nonEst NA NA        NA        NA
+#>  TRT   nonEst NA NA        NA        NA
+#> 
+#> AVISIT = VIS2:
+#>  ARMCD emmean SE df asymp.LCL asymp.UCL
+#>  PBO   nonEst NA NA        NA        NA
+#>  TRT   nonEst NA NA        NA        NA
+#> 
+#> AVISIT = VIS3:
+#>  ARMCD emmean SE df asymp.LCL asymp.UCL
+#>  PBO   nonEst NA NA        NA        NA
+#>  TRT   nonEst NA NA        NA        NA
+#> 
+#> AVISIT = VIS4:
+#>  ARMCD emmean SE df asymp.LCL asymp.UCL
+#>  PBO   nonEst NA NA        NA        NA
+#>  TRT   nonEst NA NA        NA        NA
+#> 
+#> Results are averaged over the levels of: SEX 
+#> Confidence level used: 0.95
+emmeans::emmeans(fit_subgroup2, ~ARMCD|AVISIT, data=fev_data, weights="proportional")
+#> AVISIT = VIS1:
+#>  ARMCD emmean    SE    df lower.CL upper.CL
+#>  PBO     31.8 0.812 106.9     30.2     33.4
+#>  TRT     35.2 0.916 106.1     33.4     37.0
+#> 
+#> AVISIT = VIS2:
+#>  ARMCD emmean    SE    df lower.CL upper.CL
+#>  PBO     36.9 0.671 106.8     35.5     38.2
+#>  TRT     40.4 0.720 104.2     38.9     41.8
+#> 
+#> AVISIT = VIS3:
+#>  ARMCD emmean    SE    df lower.CL upper.CL
+#>  PBO     41.9 0.515  94.6     40.9     43.0
+#>  TRT     44.9 0.631  95.2     43.6     46.1
+#> 
+#> AVISIT = VIS4:
+#>  ARMCD emmean    SE    df lower.CL upper.CL
+#>  PBO     46.3 1.340  96.0     43.6     48.9
+#>  TRT     50.9 1.470  95.4     47.9     53.8
+#> 
+#> Results are averaged over the levels of: SEX 
+#> Confidence level used: 0.95
+```
+
 ## Extraction of model features
 
 Similar to model objects created in other packages, components of `mmrm`
@@ -1162,7 +1290,6 @@ treatment arm:
 ``` r
 
 library(emmeans)
-#> mmrm() registered as emmeans extension
 #> Welcome to emmeans.
 #> Caution: You lose important information if you filter this package's results.
 #> See '? untidy'

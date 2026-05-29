@@ -1,6 +1,6 @@
 # Changelog
 
-## mmrm 0.3.17.9009
+## mmrm 0.3.17.9011
 
 #### New Features
 
@@ -12,11 +12,6 @@
   matrix includes levels not present in the fitting data, those levels
   are preserved in the model and marked as aliased, enabling prediction
   on new data containing those levels.
-- [`emp_start()`](https://openpharma.github.io/mmrm/reference/emp_start.md)
-  now supports all non-spatial covariance structure types, not just
-  unstructured. Parametrized covariance structures now use a simple
-  moment-matching procedure to identify a reasonable empirical starting
-  value.
 - [`mmrm_control()`](https://openpharma.github.io/mmrm/reference/mmrm_control.md)
   gains `emmeans_gcomp_vars` argument, enabling G-computation correction
   in

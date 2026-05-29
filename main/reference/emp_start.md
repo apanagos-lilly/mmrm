@@ -1,6 +1,6 @@
 # Empirical Starting Value
 
-Obtain empirical start value for the covariance parameters.
+Obtain empirical start value for unstructured covariance
 
 ## Usage
 
@@ -12,7 +12,6 @@ emp_start(
   visit_var,
   subject_var,
   subject_groups,
-  cov_type,
   ...
 )
 ```
@@ -46,11 +45,6 @@ emp_start(
   (`factor`)\
   subject group assignment.
 
-- cov_type:
-
-  (`string`)\
-  covariance structure type.
-
 - ...:
 
   not used.
@@ -61,8 +55,7 @@ A numeric vector of starting values.
 
 ## Details
 
-`emp_start` supports all non-spatial covariance types. It uses linear
-regression to first obtain the coefficients and uses the residuals to
-obtain the empirical variance-covariance matrix. This is then decomposed
-into standard deviations and correlations which are mapped to the
-appropriate theta parameterization for the specified covariance type.
+This `emp_start` only works for unstructured covariance structure. It
+uses linear regression to first obtain the coefficients and use the
+residuals to obtain the empirical variance-covariance, and it is then
+used to obtain the starting values.
