@@ -67,6 +67,25 @@ h_mmrm_tmb_data(
   whether drop levels for covariates. If not dropped could lead to
   singular matrix.
 
+- xlev:
+
+  (`list` or `NULL`)\
+  list of X levels produced by stats::.getXlevels
+
+- contrasts:
+
+  (`list` or `NULL`)\
+  an optional named list of contrast matrices or contrast functions
+  (like stats::contr.sum or stats::contr.poly) for specific factor
+  variables, matching the `contrasts` argument in
+  [`stats::lm()`](https://rdrr.io/r/stats/lm.html). The list names must
+  correspond to factor variable names in the model formula. When `NULL`
+  (the default), the contrasts set on the factor variables in `data` are
+  used. If a contrast matrix has rownames that include levels not
+  present in `data`, those levels are preserved and the corresponding
+  model matrix columns are marked as aliased (not estimable), enabling
+  prediction on new data containing those levels.
+
 ## Value
 
 List of class `mmrm_tmb_data` with elements:

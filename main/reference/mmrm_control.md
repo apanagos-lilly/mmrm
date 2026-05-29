@@ -73,7 +73,6 @@ mmrm_control(
   is computed separately per level. All other named variables are
   treated as intervention (subjects pooled across levels). All variables
   not named are averaged over using each subject's actual values.
-  Defaults to `NULL` (no correction).
 
 - ...:
 
@@ -219,7 +218,7 @@ mmrm_control(
 #>             gr1, con)
 #>     res
 #> }
-#> <bytecode: 0x5654723ab718>
+#> <bytecode: 0x55826d414f78>
 #> <environment: namespace:stats>
 #> attr(,"args")
 #> attr(,"args")$control
@@ -253,7 +252,7 @@ mmrm_control(
 #>   )
 #>   rep(start_value, n_groups)
 #> }
-#> <bytecode: 0x5654715d3d38>
+#> <bytecode: 0x55826c6100b0>
 #> <environment: namespace:mmrm>
 #> 
 #> $accept_singular

@@ -56,12 +56,12 @@ Source:
 Sabanes Bove D, Li L, Dedic J, Kelkhoff D, Kunzmann K, Lang B, Stock C,
 Wang Y, James D, Sidi J, Leibovitz D, Sjoberg D, Krieger N (2026).
 *mmrm: Mixed Models for Repeated Measures*. R package version
-0.3.17.9011, <https://openpharma.github.io/mmrm/>.
+0.3.17.9012, <https://openpharma.github.io/mmrm/>.
 
     @Manual{,
       title = {mmrm: Mixed Models for Repeated Measures},
       author = {Daniel {Sabanes Bove} and Liming Li and Julia Dedic and Doug Kelkhoff and Kevin Kunzmann and Brian Matthew Lang and Christian Stock and Ya Wang and Dan James and Jonathan Sidi and Daniel Leibovitz and Daniel D. Sjoberg and Nikolas Ivan Krieger},
       year = {2026},
-      note = {R package version 0.3.17.9011},
+      note = {R package version 0.3.17.9012},
       url = {https://openpharma.github.io/mmrm/},
     }

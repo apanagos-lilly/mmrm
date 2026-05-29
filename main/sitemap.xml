@@ -56,7 +56,6 @@
 <url><loc>https://openpharma.github.io/mmrm/reference/h_check_covar_nesting.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_check_fits_all_data_same.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_coef_table.html</loc></url>
-<url><loc>https://openpharma.github.io/mmrm/reference/h_compute_potential_outcomes.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_confirm_large_levels.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_construct_model_frame_inputs.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_contr_sum_type3_contrasts.html</loc></url>
@@ -81,7 +80,6 @@
 <url><loc>https://openpharma.github.io/mmrm/reference/h_extract_covariance_terms.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_first_term_containing_categ.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_fits_common_data.html</loc></url>
-<url><loc>https://openpharma.github.io/mmrm/reference/h_gcomp_emm_correction.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_generate_new_name.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_get_cov_default.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_get_empirical.html</loc></url>
@@ -93,7 +91,6 @@
 <url><loc>https://openpharma.github.io/mmrm/reference/h_get_prediction.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_get_prediction_variance.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_get_sim_per_subj.html</loc></url>
-<url><loc>https://openpharma.github.io/mmrm/reference/h_get_subject_data.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_get_theta_from_cov.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_gradient.html</loc></url>
 <url><loc>https://openpharma.github.io/mmrm/reference/h_jac_list.html</loc></url>
