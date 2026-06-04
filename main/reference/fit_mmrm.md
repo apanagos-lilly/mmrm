@@ -80,12 +80,6 @@ fit_mmrm(
   list of control options produced by
   [`mmrm_control()`](https://openpharma.github.io/mmrm/reference/mmrm_control.md).
 
-- emmeans_gcomp_vars:
-
-  (`character` or `NULL`)\
-  names of variables treated as fixed for G-computation correction.
-  Stored in the returned list for downstream use in the emmeans hook.
-
 ## Value
 
 List of class `mmrm_tmb`, see
