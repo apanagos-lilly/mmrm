@@ -15,7 +15,8 @@ h_mmrm_tmb_data(
   allow_na_response = FALSE,
   drop_levels = TRUE,
   xlev = NULL,
-  contrasts = NULL
+  contrasts = NULL,
+  emmeans_gcomp_vars = NULL
 )
 ```
 
@@ -130,6 +131,9 @@ List of class `mmrm_tmb_data` with elements:
 - `subject_groups`: `factor` specifying the grouping for each subject.
 
 - `n_groups`: `int` with the number of total groups
+
+- `emmeans_gcomp_vars`: `character` or `NULL` with the G-computation
+  variable names.
 
 ## Details
 

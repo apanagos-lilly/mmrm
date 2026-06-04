@@ -80,6 +80,12 @@ fit_mmrm(
   list of control options produced by
   [`mmrm_control()`](https://openpharma.github.io/mmrm/reference/mmrm_control.md).
 
+- emmeans_gcomp_vars:
+
+  (`character` or `NULL`)\
+  names of variables treated as fixed for G-computation correction.
+  Stored in the returned list for downstream use in the emmeans hook.
+
 ## Value
 
 List of class `mmrm_tmb`, see
@@ -103,7 +109,5 @@ Always use only the first optimizer if multiple optimizers are provided.
 ``` r
 formula <- FEV1 ~ RACE + SEX + ARMCD * AVISIT + us(AVISIT | USUBJID)
 data <- fev_data
-system.time(result <- fit_mmrm(formula, data, rep(1, nrow(fev_data))))
-#>    user  system elapsed 
-#>   0.050   0.000   0.051 
+result <- fit_mmrm(formula, data, rep(1, nrow(fev_data)))
 ```

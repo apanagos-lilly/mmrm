@@ -3,8 +3,8 @@
 ## Background
 
 After fitting a particular MMRM, one must commonly answer the question:
-
-> What was the mean value of the outcome variable in a treatment group?
+for example, in a randomized clinical trial comparing treatment groups,
+what was the mean value of the outcome variable in each treatment group?
 
 One method to answer this question is to use G-computation to estimate
 the marginal means of each treatment group. In this section, we describe
@@ -13,15 +13,15 @@ approach to variance estimation.
 
 ## G-Computation Estimator
 
-There are \\J\\ treatment groups, \\T\\ planned timepoints, and \\n\\
+There are \\J\\ treatment groups, \\m\\ planned timepoints, and \\n\\
 total subjects. Define \\ x\_{tji} = X_t(j) \in \mathbb{R}^{1 \times p},
 \\ as the row of the design matrix corresponding to subject \\i\\,
 evaluated at timepoint \\t\\ if the subject had received treatment
 \\j\\.
 
-The G-computation estimator of the mean outcome at time \\T\\ under
+The G-computation estimator of the mean outcome at time \\t\\ under
 treatment \\j\\ is \\ \hat{\theta}\_{tj} = \frac{1}{n}\sum\_{i=1}^n
-x\_{Tji}\\\hat{\beta}, \qquad j = 1,\ldots,J. \\ Collect these into the
+x\_{tji}\\\hat{\beta}, \qquad j = 1,\ldots,J. \\ Collect these into the
 vector \\\hat{\theta}\_t =
 (\hat{\theta}\_{t1},\ldots,\hat{\theta}\_{tJ})^\top \in \mathbb{R}^J\\.
 Treatment effects can be defined by contrasts or other functions of
@@ -61,9 +61,9 @@ using the `emmeans` package. To enable correct variance estimation,
 there is an option `emmeans_gcomp_vars` inside
 [`mmrm_control()`](https://openpharma.github.io/mmrm/reference/mmrm_control.md)
 that captures which variables can be treated as fixed or non-random. For
-example, since every subject is is predicted from the model at the same
+example, since every subject is predicted from the model at the same
 time point and under each treatment, a model including `TRTP` and
-`AVISIT` could include `emmeans_gcomp_vars = c("TRTP","AVISIT")`.
+`AVISIT` could include `emmeans_gcomp_vars = c("TRTP", "AVISIT")`.
 
 Using `emmeans` with option `weights = "proportional"` and passing in
 the `data` with rows for every subject and timepoint can produce
@@ -73,21 +73,22 @@ Under this call:
 
 ``` r
 
-emmeans(fit, ~TRTP | AVISIT, weights = "proportional", data=data)
+emmeans(fit, ~TRTP | AVISIT, weights = "proportional", data = data)
 ```
 
 the `emmeans` function will create a linear combination matrix. For
-example, the row \\k=(t-1)J + j\\ of this matrix is \\ L^{global}\_k =
-\frac{1}{n} \sum\_{i=1}^n x\_{tji}^{\top} \\ and estimates the mean
-using \\L^{global} \hat{\beta}\\. Using the model-trusting variance,
-`emmeans` calculates the covariance \\\hat{V}\\ using
-[`vcov()`](https://rdrr.io/r/stats/vcov.html) and calculates \\
-L^{global} \hat{V} L^{global\top} \\ To work with `emmeans`
-functionality, we create \\\hat{V}^c\\ so that \\ L^{global} \hat{V}^c
-L^{global\top} = \hat{\Omega}^c. \\
+example, the row \\k=(t-1)J + j\\ of this matrix is \\
+L^{\text{global}}\_k = \frac{1}{n} \sum\_{i=1}^n x\_{tji}^{\top} \\ and
+estimates the mean using \\L^{\text{global}} \hat{\beta}\\. Using the
+model-trusting variance, `emmeans` calculates the covariance \\\hat{V}\\
+using [`vcov()`](https://rdrr.io/r/stats/vcov.html) and calculates \\
+L^{\text{global}} \hat{V} L^{\text{global}\top} \\ To work with
+`emmeans` functionality, we create \\\hat{V}^c\\ so that \\
+L^{\text{global}} \hat{V}^c L^{\text{global}\top} = \hat{\Omega}^c. \\
 
 This turns out to involve solving a linear system \\ \hat{V}^c =
-\hat{V} + (L^{global} L^{global\top})^{-} L^{global\top} S L^{global}
-(L^{global} L^{global\top})^{-}, \\ where \\S\\ is a block-diagonal
-matrix corresponding to the relevant \\\frac{1}{n} \hat{\Sigma}\_v\\ at
-each time point and \\Z^-\\ represents the Moore-Penrose inverse.
+\hat{V} + (L^{\text{global}} L^{\text{global}\top})^{-}
+L^{\text{global}\top} S L^{\text{global}} (L^{\text{global}}
+L^{\text{global}\top})^{-}, \\ where \\S\\ is a block-diagonal matrix
+corresponding to the relevant \\\frac{1}{n} \hat{\Sigma}\_v\\ at each
+time point and \\Z^-\\ represents the Moore-Penrose inverse.
