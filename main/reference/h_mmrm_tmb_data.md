@@ -87,6 +87,13 @@ h_mmrm_tmb_data(
   model matrix columns are marked as aliased (not estimable), enabling
   prediction on new data containing those levels.
 
+- emmeans_gcomp_vars:
+
+  (`character` or `NULL`)\
+  names of variables treated as fixed for G-computation correction.
+  Stored as a comma separated string in the returned list for downstream
+  use in the emmeans hook.
+
 ## Value
 
 List of class `mmrm_tmb_data` with elements:
