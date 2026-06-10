@@ -253,7 +253,7 @@ mmrm(fev1 ~ trt * time + us(time | pts), data = out, start = emp_start)
 #>               time36               time52               time70 
 #>          -11.4078895          -15.8040920          -22.5556525 
 #>               time88              time104   trtTreatment:time2 
-#>          -28.2068896          -33.6608068            6.0436315 
+#>          -28.2068895          -33.6608067            6.0436315 
 #>   trtTreatment:time6  trtTreatment:time12  trtTreatment:time24 
 #>           27.3686373           49.4246568          107.3638489 
 #>  trtTreatment:time36  trtTreatment:time52  trtTreatment:time70 
@@ -696,20 +696,20 @@ when averaging over factor levels the model never saw.
 
 ``` r
 
-ex_data <- fev_data[!(fev_data$RACE == "White" & fev_data$SEX == "Male"),]
+ex_data <- fev_data[!(fev_data$RACE == "White" & fev_data$SEX == "Male"), ]
 fit_subgroup1 <- mmrm(
   formula = FEV1 ~ RACE + ARMCD * AVISIT + us(AVISIT | USUBJID),
-  data = ex_data[ex_data$SEX == "Female",],
+  data = ex_data[ex_data$SEX == "Female", ],
   vcov = "Asymptotic"
 )
 fit_subgroup2 <- mmrm(
   formula = FEV1 ~ RACE + ARMCD * AVISIT + us(AVISIT | USUBJID),
-  data = ex_data[ex_data$SEX == "Male",],
+  data = ex_data[ex_data$SEX == "Male", ],
   vcov = "Asymptotic"
 )
 #> Some factor levels are dropped due to singular design matrix: RACE
 
-emmeans::emmeans(fit_subgroup1, ~ARMCD|AVISIT, data = fev_data, weights = "proportional")
+emmeans::emmeans(fit_subgroup1, ~ ARMCD | AVISIT, data = fev_data, weights = "proportional")
 #> mmrm() registered as emmeans extension
 #> AVISIT = VIS1:
 #>  ARMCD emmean    SE   df lower.CL upper.CL
@@ -733,7 +733,7 @@ emmeans::emmeans(fit_subgroup1, ~ARMCD|AVISIT, data = fev_data, weights = "propo
 #> 
 #> Results are averaged over the levels of: RACE 
 #> Confidence level used: 0.95
-emmeans::emmeans(fit_subgroup2, ~ARMCD|AVISIT, data = fev_data, weights = "proportional")
+emmeans::emmeans(fit_subgroup2, ~ ARMCD | AVISIT, data = fev_data, weights = "proportional")
 #> Error in `contrasts<-`:
 #> ! wrong number of contrast matrix rows
 ```
@@ -759,18 +759,18 @@ averages over the baseline values that aren’t subgroup-specific:
 
 fit_subgroup1 <- mmrm(
   formula = FEV1 ~ RACE + ARMCD * AVISIT + us(AVISIT | USUBJID),
-  data = ex_data[ex_data$SEX == "Female",],
+  data = ex_data[ex_data$SEX == "Female", ],
   vcov = "Asymptotic",
   contrasts = list(RACE = contr_mat)
 )
 fit_subgroup2 <- mmrm(
   formula = FEV1 ~ RACE + ARMCD * AVISIT + us(AVISIT | USUBJID),
-  data = ex_data[ex_data$SEX == "Male",],
+  data = ex_data[ex_data$SEX == "Male", ],
   vcov = "Asymptotic",
   contrasts = list(RACE = contr_mat)
 )
 
-emmeans::emmeans(fit_subgroup1, ~ARMCD|AVISIT, data = fev_data, weights = "proportional")
+emmeans::emmeans(fit_subgroup1, ~ ARMCD | AVISIT, data = fev_data, weights = "proportional")
 #> AVISIT = VIS1:
 #>  ARMCD emmean    SE   df lower.CL upper.CL
 #>  PBO     34.8 1.050 76.2     32.7     36.9
@@ -793,7 +793,7 @@ emmeans::emmeans(fit_subgroup1, ~ARMCD|AVISIT, data = fev_data, weights = "propo
 #> 
 #> Results are averaged over the levels of: RACE 
 #> Confidence level used: 0.95
-emmeans::emmeans(fit_subgroup2, ~ARMCD|AVISIT, data = fev_data, weights = "proportional")
+emmeans::emmeans(fit_subgroup2, ~ ARMCD | AVISIT, data = fev_data, weights = "proportional")
 #> AVISIT = VIS1:
 #>  ARMCD emmean SE df asymp.LCL asymp.UCL
 #>  PBO   nonEst NA NA        NA        NA
