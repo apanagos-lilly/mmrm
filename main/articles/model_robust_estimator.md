@@ -99,7 +99,7 @@ block-diagonal matrix corresponding to the relevant empirical covariance
 \\\frac{1}{n} \hat{\Sigma}\_v\\ at each time point.
 
 This turns out to involve solving a linear system \\ \hat{V}\_c =
-\hat{V} + (L^{\text{global}} L^{\text{global}\top})^{-}
-L^{\text{global}\top} S L^{\text{global}} (L^{\text{global}}
-L^{\text{global}\top})^{-}, \\ where \\Z^-\\ represents the
-Moore-Penrose inverse of \\Z\\.
+\hat{V} + L^{\text{global}\top} (L^{\text{global}}
+L^{\text{global}\top})^{-} S (L^{\text{global}}
+L^{\text{global}\top})^{-} L^{\text{global}}, \\ where \\Z^-\\
+represents the Moore-Penrose inverse of \\Z\\.
