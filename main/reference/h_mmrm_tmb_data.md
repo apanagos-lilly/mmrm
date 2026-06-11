@@ -77,8 +77,9 @@ h_mmrm_tmb_data(
 
   (`list` or `NULL`)\
   an optional named list of contrast matrices or contrast functions
-  (like stats::contr.sum or stats::contr.poly) for specific factor
-  variables, matching the `contrasts` argument in
+  (like [stats::contr.sum](https://rdrr.io/r/stats/contrast.html) or
+  [stats::contr.poly](https://rdrr.io/r/stats/contrast.html)) for
+  specific factor variables, matching the `contrasts` argument in
   [`stats::lm()`](https://rdrr.io/r/stats/lm.html). The list names must
   correspond to factor variable names in the model formula. When `NULL`
   (the default), the contrasts set on the factor variables in `data` are
@@ -89,10 +90,9 @@ h_mmrm_tmb_data(
 
 - emmeans_gcomp_vars:
 
-  (`character` or `NULL`)\
-  names of variables treated as fixed for G-computation correction.
-  Stored as a comma separated string in the returned list for downstream
-  use in the emmeans hook.
+  (`character` or `NULL`) treated as fixed for G-computation correction.
+  Stored as a character vector in the returned list for downstream use
+  in the emmeans hook.
 
 ## Value
 

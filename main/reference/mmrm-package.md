@@ -17,6 +17,9 @@ Useful links:
 
 Authors:
 
+- Daniel Sabanes Bove <daniel.sabanes_bove@rconis.com>
+  ([ORCID](https://orcid.org/0000-0002-0176-9239))
+
 - Liming Li <liming.li1@astrazeneca.com>
   ([ORCID](https://orcid.org/0009-0008-6870-0878))
 

@@ -5,8 +5,7 @@ Conduct type II/III hypothesis testing on the MMRM fit results.
 ## Usage
 
 ``` r
-# S3 method for class 'mmrm'
-Anova(
+Anova.mmrm(
   mod,
   type = c("II", "III", "2", "3"),
   tol = sqrt(.Machine$double.eps),
