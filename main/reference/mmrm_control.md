@@ -218,7 +218,7 @@ mmrm_control(
 #>             gr1, con)
 #>     res
 #> }
-#> <bytecode: 0x55dc3d6cdb10>
+#> <bytecode: 0x5592ba6f2f80>
 #> <environment: namespace:stats>
 #> attr(,"args")
 #> attr(,"args")$control
@@ -248,11 +248,12 @@ mmrm_control(
 #>     adh = rep(0, 2 * n_visits - 1),
 #>     cs = rep(0, 2),
 #>     csh = rep(0, n_visits + 1),
-#>     sp_exp = rep(0, 2)
+#>     sp_exp = rep(0, 2),
+#>     sp_gau = rep(0, 2)
 #>   )
 #>   rep(start_value, n_groups)
 #> }
-#> <bytecode: 0x55dc364a2ed0>
+#> <bytecode: 0x5592baeb1878>
 #> <environment: namespace:mmrm>
 #> 
 #> $accept_singular
